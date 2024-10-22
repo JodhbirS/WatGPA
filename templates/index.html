@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WatGPA</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="title">WatGPA</div>
+        <form id="upload-form" action="/upload-transcript" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file-input" accept=".pdf">
+            <label for="file-input">Choose File</label>
+        </form>
+
+        {{if .GPA}}
+        <div class="result">
+            <h2>Your GPA is: {{printf "%.2f" .GPA}}</h2>
+        </div>
+        {{end}}
+    </div>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const form = document.getElementById('upload-form');
+
+        // Submit form when file is selected
+        fileInput.addEventListener('change', () => {
+            form.submit();
+        });
+    </script>
+</body>
+</html>
