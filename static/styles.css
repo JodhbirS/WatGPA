@@ -16,7 +16,7 @@ body {
 .title {
     color: #333;
     font-size: 64px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 #file-input {
@@ -38,7 +38,7 @@ label[for="file-input"] {
 @media (max-width: 600px) {
     .title {
         font-size: 48px;
-        margin-bottom: 40px;
+        margin-bottom: 15px;
     }
 
     label[for="file-input"] {
@@ -55,4 +55,16 @@ label[for="file-input"] {
 .result h2 {
     font-size: 24px;
     color: #333;
+}
+
+.instruction {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.error {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: red;
 }

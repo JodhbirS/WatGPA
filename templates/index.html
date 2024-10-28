@@ -9,6 +9,13 @@
 <body>
     <div class="container">
         <div class="title">WatGPA</div>
+        
+        {{if .Error}}
+            <div id="message" class="error">{{.Error}}</div>
+        {{else}}
+            <div id="message" class="instruction">Upload your Unofficial Quest Transcript</div>
+        {{end}}
+        
         <form id="upload-form" action="/upload-transcript" method="post" enctype="multipart/form-data">
             <input type="file" name="file" id="file-input" accept=".pdf">
             <label for="file-input">Choose File</label>
@@ -24,7 +31,6 @@
         const fileInput = document.getElementById('file-input');
         const form = document.getElementById('upload-form');
 
-        // Submit form when file is selected
         fileInput.addEventListener('change', () => {
             form.submit();
         });
