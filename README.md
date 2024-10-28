@@ -12,6 +12,9 @@
   - [`github.com/gorilla/mux`](https://github.com/gorilla/mux): For routing.
   - [`github.com/dslipak/pdf`](https://github.com/dslipak/pdf): For extracting text from PDFs.
 - **HTML/CSS/JavaScript**: Frontend technologies for the user interface.
+- **Docker**: Containerizing the app, making it easy to deploy and run
+- **Google Cloud Run**: Provides scalable, serverless hosting for the Dockerized app
+- **Github Actions**: Implements automated CI/CD pipelines to build and deploy the Docker image to Google Cloud Run upon code commits to GitHub
 
 
 ### **Set Up and Installation**
