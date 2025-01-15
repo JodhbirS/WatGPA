@@ -30,9 +30,18 @@
     <script>
         const fileInput = document.getElementById('file-input');
         const form = document.getElementById('upload-form');
+        const maxSize = 71 * 1024; // 71KB
 
         fileInput.addEventListener('change', () => {
-            form.submit();
+            if (fileInput.files && fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size;
+                if (fileSize > maxSize) {
+                    alert("File is too large. Maximum size is 71KB.");
+                    fileInput.value = "";
+                } else {
+                    form.submit();
+                }
+            }
         });
     </script>
 </body>

@@ -12,7 +12,7 @@ type PageData struct {
     Error string
 }
 
-const maxUploadSize = 5 * 1024 * 1024 // 5 MB
+const maxUploadSize = 71 * 1024 // 71KB
 
 // main page
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +52,7 @@ func uploadTranscriptHandler(w http.ResponseWriter, r *http.Request) {
 		file, _, err := r.FormFile("file")
 		if err != nil {
 			log.Printf("Error parsing file: %v", err)
-			renderTemplateWithError(w, "Invalid file upload. Please try again.")
+			renderTemplateWithError(w, "File is too large. Please upload a valid PDF.")
 			return
 		}
 		defer file.Close()
