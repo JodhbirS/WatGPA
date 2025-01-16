@@ -8,8 +8,8 @@ import (
 )
 
 type PageData struct {
-    GPA   float64
-    Error string
+	GPA   float64
+	Error string
 }
 
 const maxUploadSize = 71 * 1024 // 71KB
@@ -79,7 +79,7 @@ func uploadTranscriptHandler(w http.ResponseWriter, r *http.Request) {
 		_, gpa, err := CalculateGPA(tempFile.Name())
 		if err != nil {
 			log.Printf("Error processing PDF: %v", err)
-			renderTemplateWithError(w, "Failed to process your transcript. Ensure it's a valid Waterloo Works Transcript.")
+			renderTemplateWithError(w, "Failed to process your transcript. Ensure it's a valid Quest Transcript.")
 			return
 		}
 

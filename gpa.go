@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"regexp"
-	"strings"
 
 	"github.com/dslipak/pdf"
 )
@@ -24,7 +23,6 @@ func CalculateGPA(pdfPath string) ([]Course, float64, error) {
 	}
 
 	courses := extractCourses(content)
-
 	if len(courses) == 0 {
 		return nil, 0.0, fmt.Errorf("no grades found in the transcript")
 	}
@@ -64,39 +62,26 @@ func extractCourses(content string) []Course {
 
 	matches := re.FindAllStringSubmatch(content, -1)
 	for _, match := range matches {
-		if len(match) > 4 {
-			courseName := match[1]
-			earnedCreditsStr := match[2]
-			gradeStr := match[3]
-			postGradeText := match[4]
+		if len(match) < 5 {
+			continue
+		}
+		courseName := match[1]
+		earnedCreditsStr := match[2]
+		gradeStr := match[3]
 
-			var grade int
-			fmt.Sscanf(gradeStr, "%d", &grade)
+		var grade int
+		fmt.Sscanf(gradeStr, "%d", &grade)
 
-			var earnedCredits float64
-			fmt.Sscanf(earnedCreditsStr, "%f", &earnedCredits)
+		var earnedCredits float64
+		fmt.Sscanf(earnedCreditsStr, "%f", &earnedCredits)
 
-			includeInGPA := false
-
-			if earnedCredits > 0.0 {
-				includeInGPA = true
-			} else if strings.Contains(strings.ToLower(postGradeText), "included in average") {
-				includeInGPA = true
-			} else if strings.Contains(strings.ToLower(postGradeText), "not in average") {
-				includeInGPA = false
-			}
-
-			if includeInGPA {
-				course := Course{
-					Name:  courseName,
-					Grade: grade,
-					GPA:   gradeToGpa(grade),
-				}
-				courses = append(courses, course)
-			}
+		if earnedCredits > 0.0 {
+			courses = append(courses, Course{
+				Name:  courseName,
+				Grade: grade,
+			})
 		}
 	}
-
 	return courses
 }
 
